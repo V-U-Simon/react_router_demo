@@ -1,23 +1,19 @@
 import { createContext, useMemo, useState } from "react";
-import {
-  getLocalStorageValue,
-  setLocalStorageValue,
-} from "src/utils/localStorage";
 
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const initialToken = getLocalStorageValue("authToken");
+  const initialToken = localStorage.getItem("authToken");
   const [token, setToken] = useState(initialToken);
 
   async function login() {
-    setLocalStorageValue("authToken", "some-token");
+    localStorage.setItem("authToken", "some-token");
     setToken("some-token");
   }
 
   async function logout() {
-    setLocalStorageValue("authToken", undefined);
-    setToken(undefined);
+    localStorage.setItem("authToken", null);
+    setToken(null);
   }
 
   const memoValues = useMemo(() => ({ token, login, logout }), [token]);
