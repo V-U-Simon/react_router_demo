@@ -35,12 +35,20 @@ export default function Root() {
     document.getElementById("q").value = q;
   }, [q]);
 
+  const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has("q");
+
   return (
     <>
       <div id="sidebar">
         <h1>React Router Contacts</h1>
         <div>
-          <Form id="search-form" role="search">
+          <Form
+            id="search-form"
+            role="search"
+            className={searching ? "loading" : ""}
+          >
             <input
               id="q"
               aria-label="Search contacts"
@@ -50,7 +58,7 @@ export default function Root() {
               defaultValue={q}
               onChange={(event) => submit(event.currentTarget.form)}
             />
-            <div id="search-spinner" aria-hidden hidden={true} />
+            <div id="search-spinner" aria-hidden hidden={!searching} />
             <div className="sr-only" aria-live="polite"></div>
           </Form>
           <Form method="post">
