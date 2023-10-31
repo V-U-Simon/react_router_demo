@@ -1,4 +1,4 @@
-import { Form, Link, Outlet, useLoaderData } from "react-router-dom";
+import { Form, Link, Outlet, redirect, useLoaderData } from "react-router-dom";
 import { createContact, getContacts } from "../contacts";
 
 export default function Root() {
@@ -63,5 +63,6 @@ export async function loader() {
 
 export async function action() {
   const contact = await createContact();
-  return { contact };
+  return redirect(`/contacts/${contact.id}/edit`);
+  // return { contact };
 }
