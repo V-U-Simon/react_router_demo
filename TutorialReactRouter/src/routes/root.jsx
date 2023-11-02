@@ -9,7 +9,7 @@ import {
   useSubmit,
 } from "react-router-dom";
 import { useEffect } from "react";
-import { createContact, getContacts } from "../contacts";
+import { createContact, getContacts } from "../apiContacts";
 
 // export async function loader() {
 // const contacts = await getContacts();
